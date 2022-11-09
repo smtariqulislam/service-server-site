@@ -1,1 +1,1 @@
-1.nessesry thing install cors express mongodb
+1.necessesry thing install cors express mongodb
