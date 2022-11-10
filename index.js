@@ -36,6 +36,9 @@ async function run(){
 
     try{
         const serviceCollection = client.db('Advisor').collection('services');
+        const orderCollection = client.db('Advisor').collection('orders')
+
+
         app.get('/services', async(req,res)=>{
             const query = {}
             const cursor = serviceCollection.find(query)
@@ -52,6 +55,17 @@ async function run(){
 
 
         })
+
+
+        //orders api
+
+        app.post('/orders',async(req,res)=>{
+          const order =req.body;
+          const result = await orderCollection.insertOne(order);
+          res.send(result)
+        })
+
+
 
 
     }
