@@ -60,20 +60,25 @@ async function run(){
         //orders api
 
         app.get('/orders', async(req,res)=>{
-
-          let query ={};
-          if(req.query.email){
-            query ={
-              email:req.query.email
+          let query = {};
+          if (req.query.email) {
+            query = {
+              email: req.query.email,
+            };
+          }
+          else if (req.query.service) {
+            query = {
+              service:req.query.service
             }
           }
-
 
           const cursor = orderCollection.find(query);
           const orders = await cursor.toArray();
           res.send(orders);
-
         })
+
+
+        
        
 
         app.post('/orders',async(req,res)=>{
@@ -81,6 +86,10 @@ async function run(){
           const result = await orderCollection.insertOne(order);
           res.send(result)
         })
+
+
+
+        //patch
 
          app.patch("/orders/:id", async (req, res) => {
            const id = req.params.id;
@@ -95,6 +104,8 @@ async function run(){
            res.send(result);
          });
 
+
+          //delete
          app.delete("/orders/:id", async (req, res) => {
            const id = req.params.id;
            const query = { _id: ObjectId(id) };
