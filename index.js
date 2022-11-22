@@ -15,7 +15,7 @@ app.use(express.json());
 
 //basic setup
 app.get("/", (req, res) => {
-  res.send("sever running");
+  res.send("sever running you can check client site.");
 });
 
 app.listen(port, () => {
@@ -43,6 +43,7 @@ async function run(){
             const query = {}
             const cursor = serviceCollection.find(query)
             const services = await cursor.toArray();
+            // const count = await serviceCollection.estimatedDocumentCount();
             res.send(services);
 
         });
